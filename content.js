@@ -11,5 +11,8 @@ const wrapper = document.querySelector('.slideshow-download-button-wrapper');
 if (wrapper) {
   wrapper.innerHTML = wrapper.innerHTML;
   console.log(wrapper);
-  wrapper.querySelector('button').addEventListener('click', e=>getPDF().then(open));
+  wrapper.querySelector('button').addEventListener('click', e=>{
+    e.currentTarget.disable=true;
+    getPDF().then(open).then(_=>e.currentTarget.disable=false);
+  });
 }
