@@ -1,7 +1,8 @@
 const getPDF = async () => {
   const srcs = [...document.querySelectorAll('#slide-container img.slide-image')]
     .map(img=>img.srcset.split(',').pop().trim().split(' ')[0]);
-  const msg = {title:document.title,srcs:srcs};
+  const info = {title:document.title};
+  const msg = {info,srcs:srcs};
   const {data} = await new Promise(resolve => chrome.runtime.sendMessage(msg, resolve));
   const url = URL.createObjectURL(await fetch(data).then(r=>r.blob()));
   return url;
